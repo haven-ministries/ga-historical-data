@@ -1,7 +1,7 @@
 {
     "name": "Browser",
     "category": "Audience",
-    "chunkBy": "year",
+    "chunkBy": "month",
     "metrics": [
         "users",
         "newUsers",

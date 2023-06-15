@@ -1,7 +1,7 @@
 {
     "name": "Referrals",
     "category": "Acquisition",
-    "chunkBy": "year",
+    "chunkBy": "month",
     "metrics": [
         "users",
         "newUsers",

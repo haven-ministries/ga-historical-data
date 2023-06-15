@@ -1,7 +1,7 @@
 {
     "name": "Operating System",
     "category": "Audience",
-    "chunkBy": "year",
+    "chunkBy": "month",
     "metrics": [
         "users",
         "newUsers",

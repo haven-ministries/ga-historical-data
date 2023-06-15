@@ -1,7 +1,7 @@
 {
     "name": "Search Terms",
     "category": "Behavior",
-    "chunkBy": "year",
+    "chunkBy": "month",
     "metrics": ["searchUniques"],
     "dimensions": ["searchKeyword", "date"]
 }

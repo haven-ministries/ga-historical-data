@@ -1,7 +1,7 @@
 {
     "name": "New vs Returning Users",
     "category": "Audience",
-    "chunkBy": "year",
+    "chunkBy": "month",
     "metrics": [
         "users",
         "newUsers",
