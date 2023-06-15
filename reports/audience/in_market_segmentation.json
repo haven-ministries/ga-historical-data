@@ -1,0 +1,14 @@
+{
+    "name": "In-Market Segmentation",
+    "category": "Audience",
+    "chunkBy": "year",
+    "metrics": [
+        "users",
+        "newUsers",
+        "sessions",
+        "bounces",
+        "transactions",
+        "transactionRevenue"
+    ],
+    "dimensions": ["interestInMarketCategory", "date"]
+}

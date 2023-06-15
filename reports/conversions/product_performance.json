@@ -1,0 +1,7 @@
+{
+    "name": "Product Performance",
+    "category": "Conversions",
+    "chunkBy": "year",
+    "metrics": ["itemRevenue", "uniquePurchases", "itemQuantity"],
+    "dimensions": ["productSku", "productName", "productCategory", "date"]
+}

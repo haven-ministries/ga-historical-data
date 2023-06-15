@@ -1,0 +1,14 @@
+{
+    "name": "Branding",
+    "category": "Audience",
+    "chunkBy": "year",
+    "metrics": [
+        "users",
+        "newUsers",
+        "sessions",
+        "bounces",
+        "transactions",
+        "transactionRevenue"
+    ],
+    "dimensions": ["mobileDeviceBranding", "date"]
+}

@@ -1,0 +1,14 @@
+{
+    "name": "Campaigns",
+    "category": "Acquisition",
+    "chunkBy": "year",
+    "metrics": [
+        "users",
+        "newUsers",
+        "sessions",
+        "bounces",
+        "transactions",
+        "transactionRevenue"
+    ],
+    "dimensions": ["campaign", "date"]
+}

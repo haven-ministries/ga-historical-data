@@ -1,0 +1,14 @@
+{
+    "name": "Operating System",
+    "category": "Audience",
+    "chunkBy": "year",
+    "metrics": [
+        "users",
+        "newUsers",
+        "sessions",
+        "bounces",
+        "transactions",
+        "transactionRevenue"
+    ],
+    "dimensions": ["operatingSystem", "date"]
+}

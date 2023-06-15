@@ -1,0 +1,14 @@
+{
+    "name": "Browser",
+    "category": "Audience",
+    "chunkBy": "year",
+    "metrics": [
+        "users",
+        "newUsers",
+        "sessions",
+        "bounces",
+        "transactions",
+        "transactionRevenue"
+    ],
+    "dimensions": ["browser", "date"]
+}

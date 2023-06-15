@@ -1,0 +1,16 @@
+{
+    "name": "All Pages",
+    "category": "Behavior",
+    "chunkBy": "year",
+    "metrics": [
+        "sessions",
+        "newUsers",
+        "bounces",
+        "transactions",
+        "transactionRevenue",
+        "pageviews",
+        "uniquePageviews",
+        "entrances"
+    ],
+    "dimensions": ["pagePath", "date"]
+}

@@ -1,22 +1,68 @@
 import json as json
+from src.date_utils import Day, Month, Year
 
 
 class Report:
     def __init__(self, from_json_file_name: str = None, page_size: int = 10_000):
         data = None
+
         if not from_json_file_name == None:
             with open(from_json_file_name) as file:
                 data = json.load(file)
-        self.name = None if data["name"] == None else data["name"]
-        self.category = None if data["category"] == None else data["category"]
-        self.metrics = None if data["metrics"] == None else list(
-            data["metrics"])
-        self.dimensions = None if data["dimensions"] == None else data["dimensions"]
-        self.filters = None if data["filters"] == None else data["filters"]
-        self.filter_operator = None if data["filterOperator"] == None else data["filterOperator"]
-        self.page_size = 10000
-        self.start_date = "2005-01-01"
-        self.end_date = "2023-07-01"
+
+        self.name = data["name"] if "name" in data else None
+        self.category = data["category"] if "category" in data else None
+        self.metrics = list(data["metrics"]) if "metrics" in data else None
+        self.dimensions = data["dimensions"] if "dimensions" in data else None
+        self.filters = data["filters"] if "filters" in data else None
+        self.filter_operator = data["filterOperator"] if "filterOperator" in data else None
+        self.page_size = page_size
+
+        if "chunkBy" in data:
+            assert data["chunkBy"] in [
+                "day", "month", "year"], "Chunk by must be one of the following: day, month, year"
+
+        self.chunk_by = data["chunkBy"] if "chunkBy" in data else None
+
+    def generate(self, view_id: str, start_date="2000-01-01", end_date="2023-07-01") -> dict:
+        assert not view_id == None, "View ID must be specified"
+        assert not start_date == None, "Start date must be specified"
+        assert not end_date == None, "End date must be specified"
+        assert not self.dimensions == None, "Dimensions must be specified"
+        assert not self.metrics == None, "Metrics must be specified"
+
+        if self.filters:
+            assert not self.filter_operator == None, "Filter operator must be specified if filters are specified"
+            for filter_item in self.filters:
+                assert "dimension" in filter_item, "Filter dimension must be specified"
+                assert "operator" in filter_item, "Filter operator must be specified"
+                assert "expressions" in filter_item, "Filter expressions must be specified"
+
+        report_request = {
+            "viewId": view_id,
+            "dateRanges": [{"startDate": start_date, "endDate": end_date}],
+            "metrics": [{"expression": f"ga:{metric}"} for metric in self.metrics],
+            "dimensions": [{"name": f"ga:{dimension}"} for dimension in self.dimensions],
+        }
+
+        if self.filters:
+            filters = []
+            for filter_item in self.filters:
+                filters.append({
+                    "dimensionName": f"ga:{filter_item['dimension']}",
+                    "expressions": filter_item["expressions"],
+                    "operator": filter_item["operator"],
+                    "not": filter_item["not"] if "not" in filter_item else False
+                })
+            report_request["dimensionFilterClauses"] = [{
+                "filters": filters,
+                "operator": self.filter_operator if self.filter_operator else "AND"
+            }]
+
+        report_request['pageSize'] = self.page_size
+        report_request['samplingLevel'] = 'LARGE'
+
+        return {"reportRequests": [report_request]}
 
     def __str__(self):
         metrics_str = "Metrics:"
@@ -27,7 +73,7 @@ class Report:
             metrics_col1 = metrics[:half_len]
             metrics_col2 = metrics[half_len:]
             metrics_str += "\n" + \
-                "\n".join([f"    - {m1:<20}{m2:<20}" for m1,
+                "\n".join([f"    - {m1:<20} - {m2:<20}" for m1,
                           m2 in zip(metrics_col1, metrics_col2)])
             # If there's an odd number of metrics, add an empty space for alignment
             if len(metrics) % 2 != 0:

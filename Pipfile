@@ -3,12 +3,16 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[scripts]
+download = "python download.py"
+
 [packages]
 google-api-python-client = "*"
 oauth2client = "*"
 pandas = "*"
 ipykernel = "*"
 python-dotenv = "*"
+tqdm = "*"
 
 [dev-packages]
 
