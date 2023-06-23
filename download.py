@@ -57,7 +57,7 @@ def main():
         report = Report(from_json_file_name=f"reports/{category}/{name}.json")
         # df = client.getAllData(report)
 
-        client.saveCSVChunks(view_names, name, category)
+        client.saveCSVChunks(view_names, report, name, category)
         # df.to_csv(f"data/{category}/{name}.csv")
 
 
