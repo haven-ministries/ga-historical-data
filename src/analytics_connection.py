@@ -62,19 +62,14 @@ class AnalyticsConnection:
 
         return pd.concat(data_frames)
 
-    def getReport(self, view_name: str, report: Report):
+    def getReport(self, view_name: str, report: Report, start_date=datetime(2005, 1, 1), end_date=datetime(2023, 7, 1)):
         assert view_name in self.views, "View name must be one of the following: " + \
             ", ".join(self.views.keys())
 
         chunk_by = Month() if report.chunk_by == "month" else (
             Day() if report.chunk_by == "day" else Year())
 
-        start_date = datetime(2005, 1, 1)
-        end_date = datetime(2023, 7, 1)
-
         responses = []
-
-        # start_date, end_date, date_part: DatePart, fn=lambda start, end: None, *args, **kwargs
 
         def get_response(start, end):
             body = report.generate(self.views[view_name], start.strftime(

@@ -1,7 +1,7 @@
 {
     "name": "All Pages",
     "category": "Behavior",
-    "chunkBy": "month",
+    "chunkBy": "day",
     "metrics": [
         "sessions",
         "newUsers",
