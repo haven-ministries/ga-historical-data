@@ -36,6 +36,17 @@ def main():
     # df = client.getAllData(report)
     # df.to_csv(f"data/{category}/{name}.csv")
 
+    view_names = [
+        "HavenToday.org",
+        # "Player",
+        # "HavenToday.ca",
+        # "GetAnchor.com",
+        # "AnchorToday",
+        # "AnchorSample",
+        # "Haven90DayBibleChallenge",
+        # "ElFaro90DayBibleChallenge"
+    ]
+
     client = AnalyticsConnection()
     for idx, report_item in enumerate(reports):
         category = report_item["category"]
@@ -46,7 +57,7 @@ def main():
         report = Report(from_json_file_name=f"reports/{category}/{name}.json")
         # df = client.getAllData(report)
 
-        client.saveCSVChunks(report, name, category)
+        client.saveCSVChunks(view_names, name, category)
         # df.to_csv(f"data/{category}/{name}.csv")
 
 

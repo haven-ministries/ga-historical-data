@@ -122,10 +122,10 @@ class AnalyticsConnection:
                 data_frames.append(df)
         return pd.concat(data_frames, ignore_index=True)
 
-    def saveCSVChunks(self, report: Report, table_name: str, category: str):
+    def saveCSVChunks(self, view_names: [str], report: Report, table_name: str, category: str):
         start_year = 2005
-        end_year = 2005
-        for view in self.views:
+        end_year = 2023
+        for view in view_names:
             for year in range(start_year, end_year+1):
                 start_date = datetime(year, 1, 1)
                 end_date = datetime(year, 12, 31)
