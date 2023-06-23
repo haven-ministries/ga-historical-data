@@ -122,19 +122,21 @@ class AnalyticsConnection:
                 data_frames.append(df)
         return pd.concat(data_frames, ignore_index=True)
 
+    def saveCSVChunks(self, report: Report, table_name: str, category: str):
+        start_year = 2005
+        end_year = 2005
+        for view in self.views:
+            for year in range(start_year, end_year+1):
+                start_date = datetime(year, 1, 1)
+                end_date = datetime(year, 12, 31)
+                print(f'{view}: Downloading Responses for year {year} of {end_year}')
+                responses = self.getReport(view, report, start_date, end_date)
+                print(f'{view}: Creating DF for year {year} of {end_year}')
+                df = self.getDataFrame(view, responses=responses)
+                print(f'{view}: Saving CSV for year {year} of {end_year}')
+                df.to_csv(
+                    f'./data/{category}/{table_name}/{view}_{year}.csv', index=False)
+                print(f'{view}: Done saving CSV for year {year} of {end_year}\n\n')
 
-def saveCSVChunks(self, report: Report, table_name: str, category: str) -> pd.DataFrame:
-    start_year = 2005
-    end_year = 2005
-    for view in self.views:
-        for year in range(start_year, end_year+1):
-            start_date = datetime(year, 1, 1)
-            end_date = datetime(year, 12, 31)
-            print(f'{view}: Downloading Responses for year {year} of {end_year}')
-            responses = self.getReport(view, report, start_date, end_date)
-            print(f'{view}: Creating DF for year {year} of {end_year}')
-            df = self.getDataFrame(view, responses=responses)
-            print(f'{view}: Saving CSV for year {year} of {end_year}')
-            df.to_csv(
-                f'./data/{category}/{table_name}/{view}_{year}.csv', index=False)
-            print(f'{view}: Done saving CSV for year {year} of {end_year}\n\n')
+            print(f'{view}: Done saving CSVs for all years\n\n')
+        print(f'Done saving CSVs for all views\n\n')
