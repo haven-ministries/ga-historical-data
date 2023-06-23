@@ -23,8 +23,10 @@ def main():
         # {"category": "audience", "name": "other_categories"},
         # {"category": "audience", "name": "screen_resolution"},
         # {"category": "behavior", "name": "all_pages_with_filters"},
+
         {"category": "behavior", "name": "all_pages"},
-        {"category": "behavior", "name": "landing_pages"},
+        # {"category": "behavior", "name": "landing_pages"}, # TODO: DOWNLOAD LANDING PAGES
+
         # {"category": "behavior", "name": "search_terms"},
         # {"category": "conversions", "name": "product_performance"},
     ]
@@ -44,9 +46,7 @@ def main():
         report = Report(from_json_file_name=f"reports/{category}/{name}.json")
         # df = client.getAllData(report)
 
-        for view_name in client.views:
-            client.saveCSVChunks(view_name, category,
-                                 name, report=report)
+        client.saveCSVChunks(report, name, category)
         # df.to_csv(f"data/{category}/{name}.csv")
 
 
