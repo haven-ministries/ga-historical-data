@@ -10,5 +10,15 @@
         "transactions",
         "transactionRevenue"
     ],
-    "dimensions": ["networkLocation", "date"]
+    "dimensions": [
+        "continent",
+        "subContinent",
+        "country",
+        "region",
+        "metro",
+        "city",
+        "latitude",
+        "longitude",
+        "date"
+    ]
 }

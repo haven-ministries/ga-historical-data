@@ -14,6 +14,7 @@ ipykernel = "*"
 python-dotenv = "*"
 tqdm = "*"
 itables = "*"
+tenacity = "*"
 
 [dev-packages]
 

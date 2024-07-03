@@ -1,5 +1,5 @@
 {
-    "name": "Devices",
+    "name": "Mobile",
     "category": "Audience",
     "chunkBy": "month",
     "metrics": [
@@ -10,5 +10,12 @@
         "transactions",
         "transactionRevenue"
     ],
-    "dimensions": ["mobileDeviceModel", "date"]
+    "dimensions": [
+        "deviceCategory",
+        "mobileDeviceMarketingName",
+        "mobileDeviceInfo",
+        "mobileDeviceModel",
+        "mobileDeviceBranding",
+        "date"
+    ]
 }

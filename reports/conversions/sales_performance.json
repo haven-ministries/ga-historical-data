@@ -1,0 +1,7 @@
+{
+    "name": "Sales Performance",
+    "category": "Conversions",
+    "chunkBy": "month",
+    "metrics": ["itemRevenue", "uniquePurchases", "itemQuantity"],
+    "dimensions": ["transactionId", "date"]
+}
